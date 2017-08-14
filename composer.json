@@ -1,0 +1,19 @@
+{
+    "name": "james/auth",
+    "authors": [
+        {
+            "name": "jread204",
+            "email": "james-read204@outlook.com"
+        }
+    ],
+    "require": {
+        "propel/propel": "2.0.0-alpha5",
+        "phpseclib/phpseclib": "2.0.6",
+        "mailgun/mailgun-php": "2.3.4",
+        "php-http/guzzle6-adapter": "v1.1.1",
+        "php-http/message": "1.6.*"
+    },
+    "autoload": {
+        "classmap": ["model/"]
+    }
+}

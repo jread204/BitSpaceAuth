@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database name="default" defaultIdMethod="native" defaultPhpNamingMethod="underscore">
+  <table name="groups" idMethod="native" phpName="Groups">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="description" phpName="Description" type="VARCHAR" size="255" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="255" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="roles" idMethod="native" phpName="Roles">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="groupId" phpName="Groupid" type="INTEGER" required="true"/>
+    <column name="role" phpName="Role" type="VARCHAR" size="255" required="true"/>
+    <column name="description" phpName="Description" type="VARCHAR" size="255" required="true"/>
+    <foreign-key foreignTable="groups" name="roles_ibfk_1">
+      <reference local="groupId" foreign="id"/>
+    </foreign-key>
+    <index name="roles_ibfi_1">
+      <index-column name="groupId"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="usergroup" idMethod="native" phpName="Usergroup">
+    <column name="User_Id" phpName="UserId" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="Group_Id" phpName="GroupId" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="Role_id" phpName="RoleId" type="INTEGER"/>
+    <foreign-key foreignTable="groups" name="Groups_FK">
+      <reference local="Group_Id" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="users" name="Users_FK">
+      <reference local="User_Id" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="roles" name="something_FK">
+      <reference local="Role_id" foreign="id"/>
+    </foreign-key>
+    <index name="fi_ups_FK">
+      <index-column name="Group_Id"/>
+    </index>
+    <index name="fi_ething_FK">
+      <index-column name="Role_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="users" idMethod="native" phpName="Users">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="username" phpName="Username" type="VARCHAR" size="255" required="true"/>
+    <column name="password" phpName="Password" type="VARCHAR" size="255" required="true"/>
+    <column name="email" phpName="Email" type="VARCHAR" size="255" required="true"/>
+    <column name="remember_me" phpName="RememberMe" type="VARCHAR" size="255"/>
+    <unique name="username">
+      <unique-column name="username"/>
+    </unique>
+    <unique name="email">
+      <unique-column name="email"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+</database>
